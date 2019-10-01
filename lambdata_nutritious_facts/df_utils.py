@@ -3,6 +3,17 @@ utility for working with DataFrames
 """
 
 import pandas as pd
+import numpy as np
+
+class Edit:
+    def __init__(self,df = pd.DataFrame(np.ones(5))):
+        self.df = df
+    
+    def add_col(self,df,lst,name = "New_column"):
+        series = pd.Series(lst)
+        df[name] = series
+        return df
+
 
 def get_data():
     print("Options")
@@ -37,3 +48,10 @@ def remove_Nan(df):
     else:
         df = df.dropna()
         return df
+
+df = get_data()
+print(df.head(5))
+edit = Edit(df)
+new = [34,54,23,45]
+edit.add_col(df,new,name = "D")
+print(df.head())
